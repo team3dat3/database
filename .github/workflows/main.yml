@@ -1,0 +1,27 @@
+name: Build and Deploy Docker Image
+
+on:
+  push:
+    branches: [ main ]
+
+env:
+  DB: ${{ secrets.DB }}
+  DB_USER: ${{ secrets.DB_USER }}
+  DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build and save Docker image
+        run: |
+          docker build -t ${{ secrets.IMAGE_NAME }} \
+            --build-arg DB=$DB \
+            --build-arg DB_USER=$DB_USER \
+            --build-arg DB_PASSWORD=$DB_PASSWORD \
+            .
+          docker save ${{ secrets.IMAGE_NAME }} > "${{ secrets.IMAGE_NAME }}.tar"
