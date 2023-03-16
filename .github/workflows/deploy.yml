@@ -4,6 +4,11 @@ on:
   push:
     branches: [ main ]
 
+env:
+  DB: ${{ secrets.DB }}
+  DB_USER: ${{ secrets.DB_USER }}
+  DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+
 jobs:
   deploy:
     runs-on: ubuntu-22.04
@@ -15,9 +20,9 @@ jobs:
       - name: Build and save Docker image
         run: |
           docker build -t ${{ secrets.IMAGE_NAME }} \
-            --build-arg DB=${{ secrets.DB }} \
-            --build-arg DB_USER=${{ secrets.DB_USER }} \
-            --build-arg DB_PASSWORD=${{ secrets.DB_PASSWORD }} \
+            --build-arg DB=$DB \
+            --build-arg DB_USER=$DB_USER \
+            --build-arg DB_PASSWORD=$DB_PASSWORD \
             .
           docker save ${{ secrets.IMAGE_NAME }} > "${{ secrets.IMAGE_NAME }}.tar"
       - name: Upload image artifact
