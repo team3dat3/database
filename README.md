@@ -1,4 +1,4 @@
-# mysql
+# database
 MySQL Server
 
 ## Configuration
