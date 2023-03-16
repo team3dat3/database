@@ -4,8 +4,6 @@ RUN apt-get update && \
     apt-get install -y mysql-server && \
     rm -rf /var/lib/apt/lists/*
 
-COPY my.cnf /etc/mysql/my.cnf
-
 ARG DB
 ARG DB_USER
 ARG DB_PASSWORD
