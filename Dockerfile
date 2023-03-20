@@ -4,6 +4,13 @@ RUN apt-get update && \
     apt-get install -y mysql-server && \
     rm -rf /var/lib/apt/lists/*
 
+# Create a new user and group for MySQL
+RUN groupadd mysql && \
+    useradd -r -g mysql mysql
+
+# Set the ownership of the MySQL data directory to the mysql user and group
+RUN chown -R mysql:mysql /var/lib/mysql
+
 COPY my.cnf /etc/mysql/my.cnf
 
 ARG DB
@@ -15,5 +22,8 @@ RUN /etc/init.d/mysql start && \
     /etc/init.d/mysql stop
 
 EXPOSE 3306
+
+# Switch to the mysql user
+USER mysql
 
 CMD ["mysqld"]
