@@ -5,8 +5,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Create a new user and group for MySQL
-RUN groupadd mysql && \
-    useradd -r -g mysql mysql
+RUN useradd -r -g mysql mysql
 
 # Set the ownership of the MySQL data directory to the mysql user and group
 RUN chown -R mysql:mysql /var/lib/mysql
