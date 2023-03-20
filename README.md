@@ -9,7 +9,7 @@ Configure the MySQL server using the file: [my.cnf](https://github.com/team3dat3
 [![Build Docker Image](https://github.com/team3dat3/mysql/actions/workflows/main.yml/badge.svg)](https://github.com/team3dat3/mysql/actions/workflows/main.yml)
 
 ## Release branch
-- No releases yet.
+[![Build and Deploy Docker Image](https://github.com/team3dat3/database/actions/workflows/deploy.yml/badge.svg)](https://github.com/team3dat3/database/actions/workflows/deploy.yml)
 
 # How to run image
 ```
