@@ -2,7 +2,7 @@ name: Build and Deploy Docker Image
 
 on:
   push:
-    branches: [ release ]
+    branches: [ main ]
 
 env:
   DB: ${{ secrets.DB }}
@@ -50,5 +50,5 @@ jobs:
             docker stop ${{ secrets.IMAGE_NAME }}
             docker rm ${{ secrets.IMAGE_NAME }}
             docker load < "/root/containers/${{ secrets.IMAGE_NAME }}.tar"
-            docker run -d --name ${{ secrets.IMAGE_NAME }} -p 3305:3306 ${{ secrets.IMAGE_NAME }}
+            docker run -d --name ${{ secrets.IMAGE_NAME }} -p 3305:3306 -v /data/mysql:/var/lib/mysql ${{ secrets.IMAGE_NAME }}
             exit
